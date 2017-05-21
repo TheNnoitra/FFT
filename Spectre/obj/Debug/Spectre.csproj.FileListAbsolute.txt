@@ -1,0 +1,9 @@
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\bin\Debug\Spectre.exe.config
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\obj\Debug\Spectre.csprojResolveAssemblyReference.cache
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\obj\Debug\Spectre.Properties.Resources.resources
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\obj\Debug\Spectre.csproj.GenerateResource.Cache
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\bin\Debug\Spectre.exe
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\bin\Debug\Spectre.pdb
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\obj\Debug\Spectre.exe
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\obj\Debug\Spectre.pdb
+C:\Users\Asus\Desktop\CalcTest\Spectre\Spectre\obj\Debug\Spectre.Form1.resources
