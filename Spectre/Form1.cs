@@ -58,7 +58,7 @@ namespace Spectre
              
 
         }
-        const int N = 250;
+        const int N = 174;
         double[] Inner = new double[N];
         Complex[] Furie = new Complex[N];
 
@@ -120,7 +120,7 @@ namespace Spectre
 
                 }
 
-                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2))) ;//нахождение амплитуды
+                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)))/N ;//нахождение амплитуды
                 Furie[k].Faza = Math.Atan2(Furie[k].Im, Furie[k].Re) / Math.PI * 180;//нахождение фазы
                 Furie[k].Frecuensy = ((N - 1) * (k));// нахождение частоты
 
@@ -133,11 +133,19 @@ namespace Spectre
 
             }
 
-            for (int i = 0; i < N; i++)//тут отрисовываем 2й и 3й графики
+            for (int i = 1; i < N; i++)//тут отрисовываем 2й и 3й графики
             {
+                if (Furie[i].Frecuensy < 15000)
+                {
+                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);//строим Амплитудный спектр
+                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);// строим Фазный спектр
 
-                ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);//строим Амплитудный спектр
-                ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);// строим Фазный спектр
+                }
+                else if (Furie[i].Frecuensy >= 15000)
+                {
+                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude/10);//строим Амплитудный спектр
+                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza/3);// строим Фазный спектр
+                }
             }
 
         }
@@ -164,7 +172,7 @@ namespace Spectre
 
                 }
 
-                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)));
+                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)))/N;
                 Furie[k].Faza = Math.Atan2(Furie[k].Im, Furie[k].Re) / Math.PI * 180;
                 Furie[k].Frecuensy = ((N - 1) * (k));
 
@@ -177,11 +185,19 @@ namespace Spectre
 
             }
 
-            for (int i = 0; i < N; i++)
+            for (int i = 1; i < N; i++)//тут отрисовываем 2й и 3й графики
             {
+                if (Furie[i].Frecuensy < 15000)
+                {
+                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);//строим Амплитудный спектр
+                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);// строим Фазный спектр
 
-                ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);
-                ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);
+                }
+                else if (Furie[i].Frecuensy >= 15000)
+                {
+                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude / 10);//строим Амплитудный спектр
+                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр
+                }
             }
         }
 
@@ -207,7 +223,7 @@ namespace Spectre
 
                 }
 
-                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)));
+                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)))/N;
                 Furie[k].Faza = Math.Atan2(Furie[k].Im, Furie[k].Re) / Math.PI * 180;
                 Furie[k].Frecuensy = ((N - 1) * (k));
 
@@ -220,11 +236,19 @@ namespace Spectre
 
             }
 
-            for (int i = 0; i < N; i++)
+            for (int i = 1; i < N; i++)//тут отрисовываем 2й и 3й графики
             {
+                if (Furie[i].Frecuensy < 15000)
+                {
+                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);//строим Амплитудный спектр
+                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);// строим Фазный спектр
 
-                ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);
-                ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);
+                }
+                else if (Furie[i].Frecuensy >= 15000)
+                {
+                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude / 10);//строим Амплитудный спектр вторую половину
+                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр вторую половину
+                                    }
             }
         }
 
