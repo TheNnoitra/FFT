@@ -23,13 +23,13 @@ namespace Spectre
     {
         string input;//переменные
         int kol = 0;
-         
+
 
         public string[,] file = new string[500000, 3];//объявили массив. максимум 500 000 строк 
         public Form1()
         {
             InitializeComponent();
-           
+
             using (StreamReader sr = new StreamReader(@"C:\Users\Asus\Desktop\1.txt", Encoding.Default))//открываем файл по адресу записанному в " "
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");//выбирается кодировка. твои числа разделены . а не , по-этому пришлось выбрать такую кодировку
@@ -54,8 +54,8 @@ namespace Spectre
                 } //прочитали файл, сосчитали строки и записали инфу в массив file[i,j], где i - значения, j - номер столбца, откуда считали (0 - Х, 1 - Y, 2 - Z)
 
             }
-            
-             
+
+
 
         }
         const int N = 174;
@@ -65,12 +65,12 @@ namespace Spectre
         private void BTNOpen_Click(object sender, EventArgs e)// тут выполняются операци при нажатии на кнопку - Открыть
         {
 
-           LBL9.Text = Convert.ToString(kol);//выводится кол-во строк в нашу программу
-                      
+            LBL9.Text = Convert.ToString(kol);//выводится кол-во строк в нашу программу
+
             Chart4.ChartAreas[0].AxisX.Maximum = kol;//ренджируется график для Оси X/Y/Z
-                 
-                     
-                    
+
+
+
 
         }
 
@@ -93,34 +93,34 @@ namespace Spectre
             public double Amplitude; // Амплитуда для АЧХ
             public double Faza; // Фаза для ФЧХ
             public double Frecuensy; // Частота гармоники
-            
+
         }
 
 
         private void OsX_Click(object sender, EventArgs e) //действия при нажатии на кнопку - Ось X (для кнопок Ось Y, Ось Z выполняются точно такие же действия)
         {
-            
+
 
             int N = Inner.Length; //объявляем переменные
 
             double Arg;
 
-            
+
             for (int k = 0; k < N; k++)//цикл вычисления БПФ
             {
-                
+
                 Furie[k] = new Complex();//объявляем массив
                 for (int n = 0; n < N; n++)//цикл расчета/записи массива
                 {
-                   
-                    Arg = 2 * Math.PI * k * n / N;                   
+
+                    Arg = 2 * Math.PI * k * n / N;
                     Furie[k].Re += Convert.ToDouble(file[n, 0]) * Math.Cos(Arg);
                     Furie[k].Im -= Convert.ToDouble(file[n, 0]) * Math.Sin(Arg);
-                    
+
 
                 }
 
-                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)))/N ;//нахождение амплитуды
+                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2))) / N;//нахождение амплитуды
                 Furie[k].Faza = Math.Atan2(Furie[k].Im, Furie[k].Re) / Math.PI * 180;//нахождение фазы
                 Furie[k].Frecuensy = ((N - 1) * (k));// нахождение частоты
 
@@ -143,10 +143,69 @@ namespace Spectre
                 }
                 else if (Furie[i].Frecuensy >= 15000)
                 {
-                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude/10);//строим Амплитудный спектр
-                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza/3);// строим Фазный спектр
+                    ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude / 10);//строим Амплитудный спектр
+                    ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр
                 }
             }
+
+
+            /// <summary>
+            /// Вычисление виброускорения
+            /// </summary>
+            /// 
+            int f = 1;//частота
+            double P = Math.PI;//pi
+
+            double[] VibroA = new double[kol];
+
+            for (int i = 1; i < kol; i++)
+            {
+                VibroA[i] = Convert.ToDouble(file[i, 0]) * Math.Pow((2 * f * P), 2);
+            }
+            for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
+            {
+                ChartVA.Series[0].Points.AddY(VibroA[i]);
+            }
+
+            /// <summary>
+            /// Вычисление Среднеквадратичного значения
+            /// </summary>
+            /// 
+
+            double SKvadrat;
+            double Kvadrat = 0, Vrem = 0;
+            for (int i = 1; i < kol; i++)
+            {
+                Vrem = Convert.ToDouble(file[i, 0]) * Convert.ToDouble(file[i, 0]);
+                Kvadrat = Kvadrat + Vrem;
+            }
+            SKvadrat = Math.Sqrt(Kvadrat / kol);
+            SKvadrat = Math.Round(SKvadrat, 4);//обрезает число до 4х знаков после запятой
+
+            LBLSKZ.Text = Convert.ToString(SKvadrat);
+
+            /// <summary>
+            /// Вычисление пик-фактора
+            /// </summary>
+            /// пик-фактор = макс.значение вибрации / скз
+
+            double Max = 0, Znach = 0, PiKFactor;
+            for (int i = 1; i < kol; i++)
+            {
+                Znach = Convert.ToDouble(file[i, 0]);
+                if (Max < Znach)
+                {
+                    Max = Znach;
+                }
+                else if (Max >= Znach)
+                {
+
+                }
+            }
+            PiKFactor = Max / SKvadrat;
+            PiKFactor = Math.Round(PiKFactor, 4);
+            LBLPF.Text = Convert.ToString(PiKFactor);
+            LBL9.Text = Convert.ToString(kol);//выводится кол-во строк в нашу программу
 
         }
 
@@ -172,7 +231,7 @@ namespace Spectre
 
                 }
 
-                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)))/N;
+                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2))) / N;
                 Furie[k].Faza = Math.Atan2(Furie[k].Im, Furie[k].Re) / Math.PI * 180;
                 Furie[k].Frecuensy = ((N - 1) * (k));
 
@@ -199,6 +258,64 @@ namespace Spectre
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр
                 }
             }
+
+            /// <summary>
+            /// Вычисление виброускорения
+            /// </summary>
+            /// 
+            int f = 1;//частота
+            double P = Math.PI;//pi
+
+            double[] VibroA = new double[kol];
+
+            for (int i = 1; i < kol; i++)
+            {
+                VibroA[i] = Convert.ToDouble(file[i, 1]) * Math.Pow((2 * f * P), 2);
+            }
+            for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
+            {
+                ChartVA.Series[0].Points.AddY(VibroA[i]);
+            }
+
+            /// <summary>
+            /// Вычисление Среднеквадратичного значения
+            /// </summary>
+            /// 
+
+            double SKvadrat;
+            double Kvadrat = 0, Vrem = 0;
+            for (int i = 1; i < kol; i++)
+            {
+                Vrem = Convert.ToDouble(file[i, 1]) * Convert.ToDouble(file[i, 0]);
+                Kvadrat = Kvadrat + Vrem;
+            }
+            SKvadrat = Math.Sqrt(Kvadrat / kol);
+            SKvadrat = Math.Round(SKvadrat, 4);//обрезает число до 4х знаков после запятой
+
+            LBLSKZ.Text = Convert.ToString(SKvadrat);
+
+            /// <summary>
+            /// Вычисление пик-фактора
+            /// </summary>
+            /// пик-фактор = макс.значение вибрации / скз
+
+            double Max = 0, Znach = 0, PiKFactor;
+            for (int i = 1; i < kol; i++)
+            {
+                Znach = Convert.ToDouble(file[i, 1]);
+                if (Max < Znach)
+                {
+                    Max = Znach;
+                }
+                else if (Max >= Znach)
+                {
+
+                }
+            }
+            PiKFactor = Max / SKvadrat;
+            PiKFactor = Math.Round(PiKFactor, 4);
+            LBLPF.Text = Convert.ToString(PiKFactor);
+            LBL9.Text = Convert.ToString(kol);//выводится кол-во строк в нашу программу
         }
 
         private void OsZ_Click(object sender, EventArgs e)//выполняются действия при нажатии на кнопку ОсьZ
@@ -223,7 +340,7 @@ namespace Spectre
 
                 }
 
-                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2)))/N;
+                Furie[k].Amplitude = (Math.Sqrt(Math.Pow(Furie[k].Re, 2) + Math.Pow(Furie[k].Im, 2))) / N;
                 Furie[k].Faza = Math.Atan2(Furie[k].Im, Furie[k].Re) / Math.PI * 180;
                 Furie[k].Frecuensy = ((N - 1) * (k));
 
@@ -248,84 +365,147 @@ namespace Spectre
                 {
                     ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude / 10);//строим Амплитудный спектр вторую половину
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр вторую половину
-                                    }
+                }
             }
+
+            /// <summary>
+            /// Вычисление виброускорения
+            /// </summary>
+            /// 
+            int f = 1;//частота
+            double P = Math.PI;//pi
+
+            double[] VibroA = new double[kol];
+
+            for (int i = 1; i < kol; i++)
+            {
+                VibroA[i] = Convert.ToDouble(file[i, 2]) * Math.Pow((2 * f * P), 2);
+            }
+            for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
+            {
+                ChartVA.Series[0].Points.AddY(VibroA[i]);
+            }
+
+            /// <summary>
+            /// Вычисление Среднеквадратичного значения
+            /// </summary>
+            /// 
+
+            double SKvadrat;
+            double Kvadrat = 0, Vrem = 0;
+            for (int i = 1; i < kol; i++)
+            {
+                Vrem = Convert.ToDouble(file[i, 2]) * Convert.ToDouble(file[i, 0]);
+                Kvadrat = Kvadrat + Vrem;
+            }
+            SKvadrat = Math.Sqrt(Kvadrat / kol);
+            SKvadrat = Math.Round(SKvadrat, 4);//обрезает число до 4х знаков после запятой
+
+            LBLSKZ.Text = Convert.ToString(SKvadrat);
+
+            /// <summary>
+            /// Вычисление пик-фактора
+            /// </summary>
+            /// пик-фактор = макс.значение вибрации / скз
+
+            double Max = 0, Znach = 0, PiKFactor;
+            for (int i = 1; i < kol; i++)
+            {
+                Znach = Convert.ToDouble(file[i, 2]);
+                if (Max < Znach)
+                {
+                    Max = Znach;
+                }
+                else if (Max >= Znach)
+                {
+
+                }
+            }
+            PiKFactor = Max / SKvadrat;
+            PiKFactor = Math.Round(PiKFactor, 4);
+            LBLPF.Text = Convert.ToString(PiKFactor);
+            LBL9.Text = Convert.ToString(kol);//выводится кол-во строк в нашу программу
         }
 
         private void Clear_Click(object sender, EventArgs e)//выполняются действия при нажатии на кнопку Сброс.
         {
-                Chart4.Series[0].Points.Clear();//очищается первый график
-                ChartAFT.Series[0].Points.Clear();//очищается график Амплитудного спектра
-                ChartFFT.Series[0].Points.Clear();//очищается график Фазного спектра
-            
-            
+            Chart4.Series[0].Points.Clear();//очищается первый график
+            ChartAFT.Series[0].Points.Clear();//очищается график Амплитудного спектра
+            ChartFFT.Series[0].Points.Clear();//очищается график Фазного спектра
+            ChartVA.Series[0].Points.Clear();//очищается график Фазного спектра
+
+
         }
-    }
 
-
-
-
-    ///все что выделено зеленым цветом, тебе не нужно)
-
-
-    /*
-   //////
-   ///Считывает строки и числа через пробел выносит в отдельные лейблы
-   //////
-   string[,] file = new string[10000, 3];
-   using (StreamReader sr = new StreamReader(@"C:\Users\Asus\Desktop\1.txt", Encoding.Default))
-   {
-       System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-       int i = 0;
-       string input;
-       while ((input = sr.ReadLine()) != null)
-       {
-           string[] m = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-           for (int k = 0, j = 0; k < m.Length; k++)
-           {
-               if (m[k].Trim() != " ")
-               {
-                   file[i, j] = m[k];
-                   j++;
-               }
-           }
-           i++;
-       }
-   }
-   for (int i = 0; i < 2; i++)
-   {
-       LB1.Text = file[0, 0];
-       LBL2.Text = file[0, 1];
-       LBL3.Text = file[0, 2];
-       LBL4.Text = file[1, 0];
-       LBL5.Text = file[1, 1];
-       LBL6.Text = file[1, 2];
-
-
-       Double one = Convert.ToDouble(file[0, 0]);
-       Double two = Convert.ToDouble(file[1, 0]);
-       Double three = one + two;
-       LBL7.Text = Convert.ToString(three) ;
-
-   }
-   */
-
-    /*
-    //////
-    ///Только считывает строку целиком и выводит в лейбл 1
-    //////
-     using (StreamReader sr = new StreamReader(@"C:\Users\Asus\Desktop\1.txt", Encoding.Default))
-    {
-        string s = "";
-        while ((s = sr.ReadLine()) != null)
+        private void OsXSKZ_Click(object sender, EventArgs e)
         {
 
-            LB1.Text = s;
         }
-    }
-    */
-}
 
+
+
+
+        ///все что выделено зеленым цветом, тебе не нужно)
+
+
+        /*
+       //////
+       ///Считывает строки и числа через пробел выносит в отдельные лейблы
+       //////
+       string[,] file = new string[10000, 3];
+       using (StreamReader sr = new StreamReader(@"C:\Users\Asus\Desktop\1.txt", Encoding.Default))
+       {
+           System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+           int i = 0;
+           string input;
+           while ((input = sr.ReadLine()) != null)
+           {
+               string[] m = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+               for (int k = 0, j = 0; k < m.Length; k++)
+               {
+                   if (m[k].Trim() != " ")
+                   {
+                       file[i, j] = m[k];
+                       j++;
+                   }
+               }
+               i++;
+           }
+       }
+       for (int i = 0; i < 2; i++)
+       {
+           LB1.Text = file[0, 0];
+           LBL2.Text = file[0, 1];
+           LBL3.Text = file[0, 2];
+           LBL4.Text = file[1, 0];
+           LBL5.Text = file[1, 1];
+           LBL6.Text = file[1, 2];
+
+
+           Double one = Convert.ToDouble(file[0, 0]);
+           Double two = Convert.ToDouble(file[1, 0]);
+           Double three = one + two;
+           LBL7.Text = Convert.ToString(three) ;
+
+       }
+       */
+
+        /*
+        //////
+        ///Только считывает строку целиком и выводит в лейбл 1
+        //////
+         using (StreamReader sr = new StreamReader(@"C:\Users\Asus\Desktop\1.txt", Encoding.Default))
+        {
+            string s = "";
+            while ((s = sr.ReadLine()) != null)
+            {
+
+                LB1.Text = s;
+            }
+        }
+        */
+    }
+}
 
     
 
