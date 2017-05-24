@@ -138,16 +138,28 @@ namespace Spectre
                 Chart4.Series[0].Points.AddXY(i, Graf[i, 0]);//выбираем где и как рисовать, говорит ему какие точки соединить линией
 
             }
+            int MaxFreq = 0, Freq = 0;
+            for (int i = 1; i < N; i++)
+            {
+                Freq = Convert.ToInt32(Furie[i].Frecuensy);
+                if (MaxFreq < Freq)
+                {
+                    MaxFreq = Freq;
+                }
+                else if (MaxFreq >= Freq)
+                {
 
+                }
+            }
             for (int i = 1; i < N; i++)//тут отрисовываем 2й и 3й графики
             {
-                if (Furie[i].Frecuensy < 15000)
+                if (Furie[i].Frecuensy < (MaxFreq/2))
                 {
                     ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);//строим Амплитудный спектр
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);// строим Фазный спектр
 
                 }
-                else if (Furie[i].Frecuensy >= 15000)
+                else if (Furie[i].Frecuensy >= (MaxFreq / 2))
                 {
                     ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude / 10);//строим Амплитудный спектр
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр
@@ -268,16 +280,28 @@ namespace Spectre
                 Chart4.Series[0].Points.AddXY(i, Graf[i,1]);
 
             }
+            int MaxFreq = 0, Freq = 0;
+            for (int i = 1; i < N; i++)
+            {
+                Freq = Convert.ToInt32(Furie[i].Frecuensy);
+                if (MaxFreq < Freq)
+                {
+                    MaxFreq = Freq;
+                }
+                else if (MaxFreq >= Freq)
+                {
 
+                }
+            }
             for (int i = 1; i < N; i++)//тут отрисовываем 2й и 3й графики
             {
-                if (Furie[i].Frecuensy < 15000)
+                if (Furie[i].Frecuensy < (MaxFreq / 2))
                 {
                     ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);//строим Амплитудный спектр
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);// строим Фазный спектр
 
                 }
-                else if (Furie[i].Frecuensy >= 15000)
+                else if (Furie[i].Frecuensy >= (MaxFreq / 2))
                 {
                     ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude / 10);//строим Амплитудный спектр
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр
@@ -394,16 +418,28 @@ namespace Spectre
                 Chart4.Series[0].Points.AddXY(i, Graf[i, 2]);
 
             }
+            int MaxFreq = 0, Freq = 0;
+            for (int i = 1; i < N; i++)
+            {
+                Freq = Convert.ToInt32(Furie[i].Frecuensy);
+                if (MaxFreq < Freq)
+                {
+                    MaxFreq = Freq;
+                }
+                else if (MaxFreq >= Freq)
+                {
 
+                }
+            }
             for (int i = 1; i < N; i++)//тут отрисовываем 2й и 3й графики
             {
-                if (Furie[i].Frecuensy < 15000)
+                if (Furie[i].Frecuensy < (MaxFreq / 2))
                 {
                     ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude);//строим Амплитудный спектр
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza);// строим Фазный спектр
 
                 }
-                else if (Furie[i].Frecuensy >= 15000)
+                else if (Furie[i].Frecuensy >= (MaxFreq / 2))
                 {
                     ChartAFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Amplitude / 10);//строим Амплитудный спектр вторую половину
                     ChartFFT.Series[0].Points.AddXY(Furie[i].Frecuensy, Furie[i].Faza / 3);// строим Фазный спектр вторую половину
