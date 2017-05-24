@@ -303,6 +303,23 @@ namespace Spectre
             }
 
             /// <summary>
+            /// Вычисление Среднеквадратичного значения виброускорения
+            /// </summary>
+            /// 
+
+            double SKvadratU;
+            double KvadratU = 0, VremU = 0;
+            for (int i = 1; i < kol; i++)
+            {
+                VremU = VibroA[i] * VibroA[i];
+                KvadratU = KvadratU + VremU;
+            }
+            SKvadratU = Math.Sqrt(KvadratU / kol);
+            SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
+
+            LBLUSK.Text = Convert.ToString(SKvadratU);
+
+            /// <summary>
             /// Вычисление Среднеквадратичного значения
             /// </summary>
             /// 
@@ -410,7 +427,22 @@ namespace Spectre
             {
                 ChartVA.Series[0].Points.AddY(VibroA[i]);
             }
+            /// <summary>
+            /// Вычисление Среднеквадратичного значения виброускорения
+            /// </summary>
+            /// 
 
+            double SKvadratU;
+            double KvadratU = 0, VremU = 0;
+            for (int i = 1; i < kol; i++)
+            {
+                VremU = VibroA[i] * VibroA[i];
+                KvadratU = KvadratU + VremU;
+            }
+            SKvadratU = Math.Sqrt(KvadratU / kol);
+            SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
+
+            LBLUSK.Text = Convert.ToString(SKvadratU);
             /// <summary>
             /// Вычисление Среднеквадратичного значения
             /// </summary>
