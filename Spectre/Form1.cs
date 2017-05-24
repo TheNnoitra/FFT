@@ -23,13 +23,13 @@ namespace Spectre
     {
         string input;//переменные
         int kol = 0;
-
+        public double[,] Graf = new double[500000, 3];
 
         public string[,] file = new string[500000, 3];//объявили массив. максимум 500 000 строк 
         public Form1()
         {
             InitializeComponent();
-
+            
             using (StreamReader sr = new StreamReader(@"C:\Users\Asus\Desktop\1.txt", Encoding.Default))//открываем файл по адресу записанному в " "
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");//выбирается кодировка. твои числа разделены . а не , по-этому пришлось выбрать такую кодировку
@@ -52,7 +52,23 @@ namespace Spectre
                     i++;
                     kol = i;
                 } //прочитали файл, сосчитали строки и записали инфу в массив file[i,j], где i - значения, j - номер столбца, откуда считали (0 - Х, 1 - Y, 2 - Z)
+                
+                
+                  for (i = 1; i < kol; i++)
+                    {
+                        Graf[i,0] = Convert.ToDouble(file[i, 0]);
 
+                    }
+                for (i = 1; i < kol; i++)
+                {
+                    Graf[i, 1] = Convert.ToDouble(file[i, 1]);
+
+                }
+                for (i = 1; i < kol; i++)
+                {
+                    Graf[i, 2] = Convert.ToDouble(file[i, 2]);
+
+                }
             }
 
 
@@ -64,20 +80,10 @@ namespace Spectre
 
         private void BTNOpen_Click(object sender, EventArgs e)// тут выполняются операци при нажатии на кнопку - Открыть
         {
-
-            LBL9.Text = Convert.ToString(kol);//выводится кол-во строк в нашу программу
-
-            Chart4.ChartAreas[0].AxisX.Maximum = kol;//ренджируется график для Оси X/Y/Z
-
-
-
-
         }
 
         private void Chart1_Click(object sender, EventArgs e)//это случайно образовалось, не удаляй!
         {
-
-
         }
 
 
@@ -114,8 +120,8 @@ namespace Spectre
                 {
 
                     Arg = 2 * Math.PI * k * n / N;
-                    Furie[k].Re += Convert.ToDouble(file[n, 0]) * Math.Cos(Arg);
-                    Furie[k].Im -= Convert.ToDouble(file[n, 0]) * Math.Sin(Arg);
+                    Furie[k].Re += Convert.ToDouble(Graf[n, 0]) * Math.Cos(Arg);
+                    Furie[k].Im -= Convert.ToDouble(Graf[n, 0]) * Math.Sin(Arg);
 
 
                 }
@@ -129,7 +135,7 @@ namespace Spectre
             Chart4.Series[0].LegendText = "Ось X"; //задаем имя для первого графика
             for (uint i = 1; i < kol; i++)//отрисовываем первый график, для Оси
             {
-                Chart4.Series[0].Points.AddXY(i, Convert.ToDouble(file[i, 0]));//выбираем где и как рисовать, говорит ему какие точки соединить линией
+                Chart4.Series[0].Points.AddXY(i, Graf[i, 0]);//выбираем где и как рисовать, говорит ему какие точки соединить линией
 
             }
 
@@ -160,7 +166,7 @@ namespace Spectre
 
             for (int i = 1; i < kol; i++)
             {
-                VibroA[i] = Convert.ToDouble(file[i, 0]) * Math.Pow((2 * f * P), 2);
+                VibroA[i] = Graf[i, 0] * Math.Pow((2 * f * P), 2);
             }
             for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
             {
@@ -168,7 +174,24 @@ namespace Spectre
             }
 
             /// <summary>
-            /// Вычисление Среднеквадратичного значения
+            /// Вычисление Среднеквадратичного значения виброускорения
+            /// </summary>
+            /// 
+
+            double SKvadratU;
+            double KvadratU = 0, VremU = 0;
+            for (int i = 1; i < kol; i++)
+            {
+                VremU = VibroA[i] * VibroA[i];
+                KvadratU = KvadratU + VremU;
+            }
+            SKvadratU = Math.Sqrt(KvadratU / kol);
+            SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
+
+            LBLUSK.Text = Convert.ToString(SKvadratU);
+
+            /// <summary>
+            /// Вычисление Среднеквадратичного значения по Оси
             /// </summary>
             /// 
 
@@ -176,7 +199,7 @@ namespace Spectre
             double Kvadrat = 0, Vrem = 0;
             for (int i = 1; i < kol; i++)
             {
-                Vrem = Convert.ToDouble(file[i, 0]) * Convert.ToDouble(file[i, 0]);
+                Vrem = Graf[i, 0] * Graf[i, 0];
                 Kvadrat = Kvadrat + Vrem;
             }
             SKvadrat = Math.Sqrt(Kvadrat / kol);
@@ -192,7 +215,7 @@ namespace Spectre
             double Max = 0, Znach = 0, PiKFactor;
             for (int i = 1; i < kol; i++)
             {
-                Znach = Convert.ToDouble(file[i, 0]);
+                Znach = Graf[i, 0];
                 if (Max < Znach)
                 {
                     Max = Znach;
@@ -225,8 +248,8 @@ namespace Spectre
                 for (int n = 0; n < N; n++)
                 {
                     Arg = 2 * Math.PI * k * n / N;
-                    Furie[k].Re += Convert.ToDouble(file[n, 1]) * Math.Cos(Arg);
-                    Furie[k].Im -= Convert.ToDouble(file[n, 1]) * Math.Sin(Arg);
+                    Furie[k].Re += Graf[n, 1] * Math.Cos(Arg);
+                    Furie[k].Im -= Graf[n, 1] * Math.Sin(Arg);
 
 
                 }
@@ -236,11 +259,13 @@ namespace Spectre
                 Furie[k].Frecuensy = ((N - 1) * (k));
 
             }
+            
+            
 
             Chart4.Series[0].LegendText = "Ось Y";
             for (uint i = 1; i < kol; i++)
             {
-                Chart4.Series[0].Points.AddXY(i, Convert.ToDouble(file[i, 1]));
+                Chart4.Series[0].Points.AddXY(i, Graf[i,1]);
 
             }
 
@@ -286,7 +311,7 @@ namespace Spectre
             double Kvadrat = 0, Vrem = 0;
             for (int i = 1; i < kol; i++)
             {
-                Vrem = Convert.ToDouble(file[i, 1]) * Convert.ToDouble(file[i, 0]);
+                Vrem = Graf[i, 1] * Graf[i, 1];
                 Kvadrat = Kvadrat + Vrem;
             }
             SKvadrat = Math.Sqrt(Kvadrat / kol);
@@ -302,7 +327,7 @@ namespace Spectre
             double Max = 0, Znach = 0, PiKFactor;
             for (int i = 1; i < kol; i++)
             {
-                Znach = Convert.ToDouble(file[i, 1]);
+                Znach = Graf[i, 1];
                 if (Max < Znach)
                 {
                     Max = Znach;
@@ -334,8 +359,8 @@ namespace Spectre
                 for (int n = 0; n < N; n++)
                 {
                     Arg = 2 * Math.PI * k * n / N;
-                    Furie[k].Re += Convert.ToDouble(file[n, 2]) * Math.Cos(Arg);
-                    Furie[k].Im -= Convert.ToDouble(file[n, 2]) * Math.Sin(Arg);
+                    Furie[k].Re += Graf[n, 2] * Math.Cos(Arg);
+                    Furie[k].Im -= Graf[n, 2] * Math.Sin(Arg);
 
 
                 }
@@ -349,7 +374,7 @@ namespace Spectre
             Chart4.Series[0].LegendText = "Ось Z";
             for (uint i = 1; i < kol; i++)
             {
-                Chart4.Series[0].Points.AddXY(i, Convert.ToDouble(file[i, 2]));
+                Chart4.Series[0].Points.AddXY(i, Graf[i, 2]);
 
             }
 
@@ -379,7 +404,7 @@ namespace Spectre
 
             for (int i = 1; i < kol; i++)
             {
-                VibroA[i] = Convert.ToDouble(file[i, 2]) * Math.Pow((2 * f * P), 2);
+                VibroA[i] = Graf[i, 2] * Math.Pow((2 * f * P), 2);
             }
             for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
             {
@@ -395,7 +420,7 @@ namespace Spectre
             double Kvadrat = 0, Vrem = 0;
             for (int i = 1; i < kol; i++)
             {
-                Vrem = Convert.ToDouble(file[i, 2]) * Convert.ToDouble(file[i, 0]);
+                Vrem = Graf[i, 2] * Graf[i, 2];
                 Kvadrat = Kvadrat + Vrem;
             }
             SKvadrat = Math.Sqrt(Kvadrat / kol);
@@ -411,7 +436,7 @@ namespace Spectre
             double Max = 0, Znach = 0, PiKFactor;
             for (int i = 1; i < kol; i++)
             {
-                Znach = Convert.ToDouble(file[i, 2]);
+                Znach = Graf[i, 2];
                 if (Max < Znach)
                 {
                     Max = Znach;
