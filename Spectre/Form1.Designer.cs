@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend15 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea16 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend16 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.LBL9 = new System.Windows.Forms.Label();
             this.Chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ChartFFT = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -54,8 +54,6 @@
             this.LBLPF = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ChartVA = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.LBLUSK = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Chart4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartFFT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartAFT)).BeginInit();
@@ -65,7 +63,7 @@
             // LBL9
             // 
             this.LBL9.AutoSize = true;
-            this.LBL9.Location = new System.Drawing.Point(1147, 404);
+            this.LBL9.Location = new System.Drawing.Point(1154, 586);
             this.LBL9.Name = "LBL9";
             this.LBL9.Size = new System.Drawing.Size(0, 13);
             this.LBL9.TabIndex = 9;
@@ -73,17 +71,17 @@
             // Chart4
             // 
             this.Chart4.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
-            chartArea13.Name = "ChartArea1";
-            this.Chart4.ChartAreas.Add(chartArea13);
-            legend13.Name = "Legend1";
-            this.Chart4.Legends.Add(legend13);
+            chartArea1.Name = "ChartArea1";
+            this.Chart4.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.Chart4.Legends.Add(legend1);
             this.Chart4.Location = new System.Drawing.Point(12, 12);
             this.Chart4.Name = "Chart4";
-            series13.ChartArea = "ChartArea1";
-            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series13.Legend = "Legend1";
-            series13.Name = "Ось Х";
-            this.Chart4.Series.Add(series13);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "График виброускорения";
+            this.Chart4.Series.Add(series1);
             this.Chart4.Size = new System.Drawing.Size(1058, 138);
             this.Chart4.TabIndex = 11;
             this.Chart4.Text = "График столбца 1";
@@ -91,16 +89,16 @@
             // ChartFFT
             // 
             this.ChartFFT.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
-            chartArea14.Name = "ChartArea1";
-            this.ChartFFT.ChartAreas.Add(chartArea14);
-            legend14.Name = "Legend1";
-            this.ChartFFT.Legends.Add(legend14);
+            chartArea2.Name = "ChartArea1";
+            this.ChartFFT.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.ChartFFT.Legends.Add(legend2);
             this.ChartFFT.Location = new System.Drawing.Point(12, 469);
             this.ChartFFT.Name = "ChartFFT";
-            series14.ChartArea = "ChartArea1";
-            series14.Legend = "Legend1";
-            series14.Name = "Фазный спектр";
-            this.ChartFFT.Series.Add(series14);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Фазный спектр";
+            this.ChartFFT.Series.Add(series2);
             this.ChartFFT.Size = new System.Drawing.Size(1058, 148);
             this.ChartFFT.TabIndex = 14;
             this.ChartFFT.Text = "График столбца 1";
@@ -108,16 +106,16 @@
             // ChartAFT
             // 
             this.ChartAFT.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
-            chartArea15.Name = "ChartArea1";
-            this.ChartAFT.ChartAreas.Add(chartArea15);
-            legend15.Name = "Legend1";
-            this.ChartAFT.Legends.Add(legend15);
+            chartArea3.Name = "ChartArea1";
+            this.ChartAFT.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.ChartAFT.Legends.Add(legend3);
             this.ChartAFT.Location = new System.Drawing.Point(12, 312);
             this.ChartAFT.Name = "ChartAFT";
-            series15.ChartArea = "ChartArea1";
-            series15.Legend = "Legend1";
-            series15.Name = "Амплитудный спектр";
-            this.ChartAFT.Series.Add(series15);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Амплитудный спектр";
+            this.ChartAFT.Series.Add(series3);
             this.ChartAFT.Size = new System.Drawing.Size(1058, 151);
             this.ChartAFT.TabIndex = 15;
             this.ChartAFT.Text = "График столбца 1";
@@ -165,16 +163,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1083, 105);
+            this.label1.Location = new System.Drawing.Point(1076, 312);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.Size = new System.Drawing.Size(117, 13);
             this.label1.TabIndex = 24;
-            this.label1.Text = "СКЗ";
+            this.label1.Text = "СКЗ виброускорения:";
             // 
             // LBLSKZ
             // 
             this.LBLSKZ.AutoSize = true;
-            this.LBLSKZ.Location = new System.Drawing.Point(1083, 127);
+            this.LBLSKZ.Location = new System.Drawing.Point(1076, 334);
             this.LBLSKZ.Name = "LBLSKZ";
             this.LBLSKZ.Size = new System.Drawing.Size(0, 13);
             this.LBLSKZ.TabIndex = 25;
@@ -182,7 +180,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1146, 380);
+            this.label3.Location = new System.Drawing.Point(1153, 562);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 13);
             this.label3.TabIndex = 26;
@@ -191,7 +189,7 @@
             // LBLPF
             // 
             this.LBLPF.AutoSize = true;
-            this.LBLPF.Location = new System.Drawing.Point(1077, 88);
+            this.LBLPF.Location = new System.Drawing.Point(1079, 406);
             this.LBLPF.Name = "LBLPF";
             this.LBLPF.Size = new System.Drawing.Size(0, 13);
             this.LBLPF.TabIndex = 28;
@@ -199,7 +197,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1077, 66);
+            this.label4.Location = new System.Drawing.Point(1079, 384);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 27;
@@ -208,44 +206,25 @@
             // ChartVA
             // 
             this.ChartVA.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
-            chartArea16.Name = "ChartArea1";
-            this.ChartVA.ChartAreas.Add(chartArea16);
-            legend16.Name = "Legend1";
-            this.ChartVA.Legends.Add(legend16);
+            chartArea4.Name = "ChartArea1";
+            this.ChartVA.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.ChartVA.Legends.Add(legend4);
             this.ChartVA.Location = new System.Drawing.Point(12, 158);
             this.ChartVA.Name = "ChartVA";
-            series16.ChartArea = "ChartArea1";
-            series16.Legend = "Legend1";
-            series16.Name = "Ускор.";
-            this.ChartVA.Series.Add(series16);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "График виброскорости";
+            this.ChartVA.Series.Add(series4);
             this.ChartVA.Size = new System.Drawing.Size(1058, 148);
             this.ChartVA.TabIndex = 29;
             this.ChartVA.Text = "График столбца 1";
-            // 
-            // LBLUSK
-            // 
-            this.LBLUSK.AutoSize = true;
-            this.LBLUSK.Location = new System.Drawing.Point(1083, 242);
-            this.LBLUSK.Name = "LBLUSK";
-            this.LBLUSK.Size = new System.Drawing.Size(0, 13);
-            this.LBLUSK.TabIndex = 31;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1077, 220);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 13);
-            this.label5.TabIndex = 30;
-            this.label5.Text = "СКЗ ускорения";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1237, 631);
-            this.Controls.Add(this.LBLUSK);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.ChartVA);
             this.Controls.Add(this.LBLPF);
             this.Controls.Add(this.label4);
@@ -286,8 +265,6 @@
         private System.Windows.Forms.Label LBLPF;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartVA;
-        private System.Windows.Forms.Label LBLUSK;
-        private System.Windows.Forms.Label label5;
     }
 }
 

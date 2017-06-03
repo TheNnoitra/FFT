@@ -132,7 +132,7 @@ namespace Spectre
 
             }//тт мы типа произвели БПФ, осталось вывести полученные данные
 
-            Chart4.Series[0].LegendText = "Ось X"; //задаем имя для первого графика
+            Chart4.Series[0].LegendText = "Виброускорение \n по оси X"; //задаем имя для первого графика (\n - команда перевода каретки на новую строку. то есть текст за ним будет начинаться с новой строки)
             for (uint i = 1; i < kol; i++)//отрисовываем первый график, для Оси
             {
                 Chart4.Series[0].Points.AddXY(i, Graf[i, 0]);//выбираем где и как рисовать, говорит ему какие точки соединить линией
@@ -151,7 +151,7 @@ namespace Spectre
 
                 }
             }
-            for (int i = 1; i < N; i++)//тут отрисовываем 2й и 3й графики
+            for (int i = 1; i < N; i++)//тут отрисовываем 3й и 4й
             {
                 if (Furie[i].Frecuensy < (MaxFreq/2))
                 {
@@ -168,39 +168,20 @@ namespace Spectre
 
 
             /// <summary>
-            /// Вычисление виброускорения
+            /// Вычисление виброскорости
             /// </summary>
             /// 
-            int f = 1;//частота
-            double P = Math.PI;//pi
-
+            ChartVA.Series[0].LegendText = "Виброскорость \n по оси X"; //задаем имя для первого графика (\n - команда перевода каретки на новую строку. то есть текст за ним будет начинаться с новой строки)
             double[] VibroA = new double[kol];
 
             for (int i = 1; i < kol; i++)
             {
-                VibroA[i] = Graf[i, 0] * Math.Pow((2 * f * P), 2);
+                VibroA[i] = (Graf[i-1, 0] + 4*Graf[i, 0] + Graf[i + 1, 0])*0.2/6;
             }
-            for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
+            for (int i = 1; i < kol; i++)//тут отрисовываем 2й график
             {
                 ChartVA.Series[0].Points.AddY(VibroA[i]);
-            }
-
-            /// <summary>
-            /// Вычисление Среднеквадратичного значения виброускорения
-            /// </summary>
-            /// 
-
-            double SKvadratU;
-            double KvadratU = 0, VremU = 0;
-            for (int i = 1; i < kol; i++)
-            {
-                VremU = VibroA[i] * VibroA[i];
-                KvadratU = KvadratU + VremU;
-            }
-            SKvadratU = Math.Sqrt(KvadratU / kol);
-            SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
-
-            LBLUSK.Text = Convert.ToString(SKvadratU);
+            }         
 
             /// <summary>
             /// Вычисление Среднеквадратичного значения по Оси
@@ -271,10 +252,10 @@ namespace Spectre
                 Furie[k].Frecuensy = ((N - 1) * (k));
 
             }
-            
-            
 
-            Chart4.Series[0].LegendText = "Ось Y";
+
+
+            Chart4.Series[0].LegendText = "Виброускорение \n по оси Y";
             for (uint i = 1; i < kol; i++)
             {
                 Chart4.Series[0].Points.AddXY(i, Graf[i,1]);
@@ -312,16 +293,14 @@ namespace Spectre
             /// Вычисление виброускорения
             /// </summary>
             /// 
-            int f = 1;//частота
-            double P = Math.PI;//pi
-
+            ChartVA.Series[0].LegendText = "Виброскорость \n по оси Y"; //задаем имя для первого графика (\n - команда перевода каретки на новую строку. то есть текст за ним будет начинаться с новой строки)
             double[] VibroA = new double[kol];
 
             for (int i = 1; i < kol; i++)
             {
-                VibroA[i] = Convert.ToDouble(file[i, 1]) * Math.Pow((2 * f * P), 2);
+                VibroA[i] = (Graf[i - 1, 1] + 4 * Graf[i, 1] + Graf[i + 1, 1]) * 0.2 / 6;
             }
-            for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
+            for (int i = 1; i < kol; i++)//тут отрисовываем 2й график
             {
                 ChartVA.Series[0].Points.AddY(VibroA[i]);
             }
@@ -341,7 +320,7 @@ namespace Spectre
             SKvadratU = Math.Sqrt(KvadratU / kol);
             SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
 
-            LBLUSK.Text = Convert.ToString(SKvadratU);
+            
 
             /// <summary>
             /// Вычисление Среднеквадратичного значения
@@ -412,7 +391,7 @@ namespace Spectre
 
             }
 
-            Chart4.Series[0].LegendText = "Ось Z";
+            Chart4.Series[0].LegendText = "Виброускорение \n по оси Z";
             for (uint i = 1; i < kol; i++)
             {
                 Chart4.Series[0].Points.AddXY(i, Graf[i, 2]);
@@ -450,16 +429,14 @@ namespace Spectre
             /// Вычисление виброускорения
             /// </summary>
             /// 
-            int f = 1;//частота
-            double P = Math.PI;//pi
-
+            ChartVA.Series[0].LegendText = "Виброскорость \n по оси Z"; //задаем имя для первого графика (\n - команда перевода каретки на новую строку. то есть текст за ним будет начинаться с новой строки)
             double[] VibroA = new double[kol];
 
             for (int i = 1; i < kol; i++)
             {
-                VibroA[i] = Graf[i, 2] * Math.Pow((2 * f * P), 2);
+                VibroA[i] = (Graf[i - 1, 2] + 4 * Graf[i, 2] + Graf[i + 1, 2]) * 0.2 / 6;
             }
-            for (int i = 1; i < kol; i++)//тут отрисовываем 2й и 3й графики
+            for (int i = 1; i < kol; i++)//тут отрисовываем 2й график
             {
                 ChartVA.Series[0].Points.AddY(VibroA[i]);
             }
@@ -478,7 +455,7 @@ namespace Spectre
             SKvadratU = Math.Sqrt(KvadratU / kol);
             SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
 
-            LBLUSK.Text = Convert.ToString(SKvadratU);
+          
             /// <summary>
             /// Вычисление Среднеквадратичного значения
             /// </summary>
