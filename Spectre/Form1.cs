@@ -184,7 +184,7 @@ namespace Spectre
             }         
 
             /// <summary>
-            /// Вычисление Среднеквадратичного значения по Оси
+            /// Вычисление Среднеквадратичного значения по ускорению
             /// </summary>
             /// 
 
@@ -200,6 +200,22 @@ namespace Spectre
 
             LBLSKZ.Text = Convert.ToString(SKvadrat);
 
+            /// <summary>
+            /// Вычисление Среднеквадратичного значения по скорости
+            /// </summary>
+            /// 
+
+            double SKZ;
+            double Kvad = 0, Vremya = 0;
+            for (int i = 1; i < kol; i++)
+            {
+                Vremya = VibroA[i] * VibroA[i];
+                Kvad = Kvad + Vremya;
+            }
+            SKZ = Math.Sqrt(Kvad / kol);
+            SKZ = Math.Round(SKZ, 4);//обрезает число до 4х знаков после запятой
+
+            LBLSKZV.Text = Convert.ToString(SKZ);
             /// <summary>
             /// Вычисление пик-фактора
             /// </summary>
@@ -290,7 +306,7 @@ namespace Spectre
             }
 
             /// <summary>
-            /// Вычисление виброускорения
+            /// Вычисление виброcкорости по оси Y
             /// </summary>
             /// 
             ChartVA.Series[0].LegendText = "Виброскорость \n по оси Y"; //задаем имя для первого графика (\n - команда перевода каретки на новую строку. то есть текст за ним будет начинаться с новой строки)
@@ -306,24 +322,26 @@ namespace Spectre
             }
 
             /// <summary>
-            /// Вычисление Среднеквадратичного значения виброускорения
+            /// Вычисление Среднеквадратичного значения по скорости
             /// </summary>
             /// 
 
-            double SKvadratU;
-            double KvadratU = 0, VremU = 0;
+            double SKZ;
+            double Kvad = 0, Vremya = 0;
             for (int i = 1; i < kol; i++)
             {
-                VremU = VibroA[i] * VibroA[i];
-                KvadratU = KvadratU + VremU;
+                Vremya = VibroA[i] * VibroA[i];
+                Kvad = Kvad + Vremya;
             }
-            SKvadratU = Math.Sqrt(KvadratU / kol);
-            SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
+            SKZ = Math.Sqrt(Kvad / kol);
+            SKZ = Math.Round(SKZ, 4);//обрезает число до 4х знаков после запятой
 
-            
+            LBLSKZV.Text = Convert.ToString(SKZ);
+
+
 
             /// <summary>
-            /// Вычисление Среднеквадратичного значения
+            /// Вычисление Среднеквадратичного значения виброускорения
             /// </summary>
             /// 
 
@@ -426,7 +444,7 @@ namespace Spectre
             }
 
             /// <summary>
-            /// Вычисление виброускорения
+            /// Вычисление виброскорости по оси Z
             /// </summary>
             /// 
             ChartVA.Series[0].LegendText = "Виброскорость \n по оси Z"; //задаем имя для первого графика (\n - команда перевода каретки на новую строку. то есть текст за ним будет начинаться с новой строки)
@@ -440,24 +458,27 @@ namespace Spectre
             {
                 ChartVA.Series[0].Points.AddY(VibroA[i]);
             }
+
             /// <summary>
-            /// Вычисление Среднеквадратичного значения виброускорения
+            /// Вычисление Среднеквадратичного значения по скорости
             /// </summary>
             /// 
 
-            double SKvadratU;
-            double KvadratU = 0, VremU = 0;
+            double SKZ;
+            double Kvad = 0, Vremya = 0;
             for (int i = 1; i < kol; i++)
             {
-                VremU = VibroA[i] * VibroA[i];
-                KvadratU = KvadratU + VremU;
+                Vremya = VibroA[i] * VibroA[i];
+                Kvad = Kvad + Vremya;
             }
-            SKvadratU = Math.Sqrt(KvadratU / kol);
-            SKvadratU = Math.Round(SKvadratU, 4);//обрезает число до 4х знаков после запятой
+            SKZ = Math.Sqrt(Kvad / kol);
+            SKZ = Math.Round(SKZ, 4);//обрезает число до 4х знаков после запятой
 
-          
+            LBLSKZV.Text = Convert.ToString(SKZ);
+
+
             /// <summary>
-            /// Вычисление Среднеквадратичного значения
+            /// Вычисление Среднеквадратичного значения виброускорения
             /// </summary>
             /// 
 
@@ -499,10 +520,10 @@ namespace Spectre
 
         private void Clear_Click(object sender, EventArgs e)//выполняются действия при нажатии на кнопку Сброс.
         {
-            Chart4.Series[0].Points.Clear();//очищается первый график
-            ChartAFT.Series[0].Points.Clear();//очищается график Амплитудного спектра
-            ChartFFT.Series[0].Points.Clear();//очищается график Фазного спектра
-            ChartVA.Series[0].Points.Clear();//очищается график Фазного спектра
+          Chart4.Series[0].Points.Clear();//очищается график виброускорения
+          ChartAFT.Series[0].Points.Clear();//очищается график Амплитудного спектра
+          ChartFFT.Series[0].Points.Clear();//очищается график Фазного спектра
+          ChartVA.Series[0].Points.Clear();//очищается график виброскорости
 
 
         }
@@ -512,8 +533,10 @@ namespace Spectre
 
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-
+        }
 
         ///все что выделено зеленым цветом, тебе не нужно)
 

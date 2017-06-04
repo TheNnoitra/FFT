@@ -54,6 +54,8 @@
             this.LBLPF = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ChartVA = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.LBLSKZV = new System.Windows.Forms.Label();
+            this.LBLvibroskorost = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Chart4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartFFT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartAFT)).BeginInit();
@@ -122,7 +124,7 @@
             // 
             // Os
             // 
-            this.Os.Location = new System.Drawing.Point(1157, 37);
+            this.Os.Location = new System.Drawing.Point(1157, 312);
             this.Os.Name = "Os";
             this.Os.Size = new System.Drawing.Size(75, 23);
             this.Os.TabIndex = 16;
@@ -132,7 +134,7 @@
             // 
             // OsY
             // 
-            this.OsY.Location = new System.Drawing.Point(1157, 66);
+            this.OsY.Location = new System.Drawing.Point(1157, 341);
             this.OsY.Name = "OsY";
             this.OsY.Size = new System.Drawing.Size(75, 23);
             this.OsY.TabIndex = 17;
@@ -142,7 +144,7 @@
             // 
             // OsZ
             // 
-            this.OsZ.Location = new System.Drawing.Point(1157, 95);
+            this.OsZ.Location = new System.Drawing.Point(1157, 370);
             this.OsZ.Name = "OsZ";
             this.OsZ.Size = new System.Drawing.Size(75, 23);
             this.OsZ.TabIndex = 18;
@@ -152,7 +154,7 @@
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(1157, 158);
+            this.Clear.Location = new System.Drawing.Point(1157, 433);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(75, 23);
             this.Clear.TabIndex = 19;
@@ -163,7 +165,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1076, 312);
+            this.label1.Location = new System.Drawing.Point(1076, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 13);
             this.label1.TabIndex = 24;
@@ -172,7 +174,7 @@
             // LBLSKZ
             // 
             this.LBLSKZ.AutoSize = true;
-            this.LBLSKZ.Location = new System.Drawing.Point(1076, 334);
+            this.LBLSKZ.Location = new System.Drawing.Point(1076, 34);
             this.LBLSKZ.Name = "LBLSKZ";
             this.LBLSKZ.Size = new System.Drawing.Size(0, 13);
             this.LBLSKZ.TabIndex = 25;
@@ -189,7 +191,7 @@
             // LBLPF
             // 
             this.LBLPF.AutoSize = true;
-            this.LBLPF.Location = new System.Drawing.Point(1079, 406);
+            this.LBLPF.Location = new System.Drawing.Point(1079, 106);
             this.LBLPF.Name = "LBLPF";
             this.LBLPF.Size = new System.Drawing.Size(0, 13);
             this.LBLPF.TabIndex = 28;
@@ -197,7 +199,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1079, 384);
+            this.label4.Location = new System.Drawing.Point(1079, 84);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 27;
@@ -220,11 +222,30 @@
             this.ChartVA.TabIndex = 29;
             this.ChartVA.Text = "График столбца 1";
             // 
+            // LBLSKZV
+            // 
+            this.LBLSKZV.AutoSize = true;
+            this.LBLSKZV.Location = new System.Drawing.Point(1076, 191);
+            this.LBLSKZV.Name = "LBLSKZV";
+            this.LBLSKZV.Size = new System.Drawing.Size(0, 13);
+            this.LBLSKZV.TabIndex = 31;
+            // 
+            // LBLvibroskorost
+            // 
+            this.LBLvibroskorost.AutoSize = true;
+            this.LBLvibroskorost.Location = new System.Drawing.Point(1076, 169);
+            this.LBLvibroskorost.Name = "LBLvibroskorost";
+            this.LBLvibroskorost.Size = new System.Drawing.Size(111, 13);
+            this.LBLvibroskorost.TabIndex = 30;
+            this.LBLvibroskorost.Text = "СКЗ виброскорости:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1237, 631);
+            this.Controls.Add(this.LBLSKZV);
+            this.Controls.Add(this.LBLvibroskorost);
             this.Controls.Add(this.ChartVA);
             this.Controls.Add(this.LBLPF);
             this.Controls.Add(this.label4);
@@ -241,6 +262,7 @@
             this.Controls.Add(this.LBL9);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Chart4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartFFT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartAFT)).EndInit();
@@ -265,6 +287,8 @@
         private System.Windows.Forms.Label LBLPF;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartVA;
+        private System.Windows.Forms.Label LBLSKZV;
+        private System.Windows.Forms.Label LBLvibroskorost;
     }
 }
 
